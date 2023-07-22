@@ -3,7 +3,9 @@ name = "sup-smsac"
 version = "0.1.0-beta.1"
 edition = "2021"
 license = "MIT OR Apache-2.0"
+authors = ["sup39 <sms@sup39.dev>"]
 repository = "https://github.com/sup39/sup-smsac"
+description = "A tool to support Super Mario Sunshine academic research and TAS."
 
 [dependencies]
 sup-smsac-derive = { path = "./sup-smsac-derive" }

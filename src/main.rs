@@ -14,6 +14,13 @@ use std::path::PathBuf;
 use clap::Parser;
 
 #[derive(Parser)]
+#[command(author, version, about)]
+#[command(help_template = "\
+{before-help{name} v{version}
+{usage-heading} {usage}
+
+{all-args}{after-help}
+")]
 struct Args {
   #[arg(long, default_value_t = IpAddr::V4(std::net::Ipv4Addr::LOCALHOST))]
   host: IpAddr,

@@ -1,6 +1,9 @@
 # sup-smsac
 A tool to support Super Mario Sunshine academic research and TAS.
-It is written in Rust (backend) and JavaScript (frontend), and uses HTTP + WebSocket to communicate between backend and frontend.
+
+It is written in Rust (backend) and JavaScript (frontend),
+and uses HTTP + WebSocket to communicate between backend and frontend.
+
 It only contains a simple Object Viewer at the moment.
 
 ## Usage

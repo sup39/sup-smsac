@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2023 sup39 <sms@sup39.dev>
+// SPDX-License-Identifier: MIT OR Apache-2.0
+
 // @ts-check
 /**
  * @typedef {{addr: number, cls: string, name: string, count: number}} Manager
