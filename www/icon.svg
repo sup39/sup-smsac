@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-60,-66 120,120">
+<defs>
+  <path id="limb" d="M50,0 l-20,10 v-20 z"/>
+  <g id="palp">
+    <path d="M55,0 l-25,10 v-20 z"/>
+    <circle cx="55" cy="0" r="7.5"/>
+  </g>
+  <ellipse id="eye" cx="8.5" cy="-4" rx="4" ry="8"/>
+<style>
+g {
+  stroke: #111;
+  stroke-width: 2;
+  fill: #ff9;
+  stroke-linejoin: round;
+}
+#eye {
+  fill: #111;
+  stroke: none;
+}
+</style>
+</defs>
+<g>
+<use xlink:href="#limb"/>
+<use xlink:href="#limb" transform="rotate(45)"/>
+<use xlink:href="#limb" transform="rotate(90)"/>
+<use xlink:href="#limb" transform="rotate(135)"/>
+<use xlink:href="#limb" transform="rotate(180)"/>
+<use xlink:href="#palp" transform="rotate(-45)"/>
+<use xlink:href="#palp" transform="rotate(-90)"/>
+<use xlink:href="#palp" transform="rotate(-135)"/>
+<circle cx="0" cy="0" r="35"/>
+<circle cx="0" cy="0" r="28.5"/>
+<use xlink:href="#eye"/>
+<use xlink:href="#eye" transform="scale(-1,1)"/>
+</g>
+</svg>

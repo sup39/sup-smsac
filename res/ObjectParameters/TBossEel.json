@@ -1,0 +1,73 @@
+{
+  "TBossEel": {
+    "size": 544,
+    "offsets": [
+      {
+        "offset": "0",
+        "type": "TSpineEnemy",
+        "name": "Inherited fields",
+        "notes": ""
+      },
+      {
+        "offset": ["16c", "70"],
+        "type": "s32",
+        "name": "tooth[0].hp",
+        "notes": ""
+      },
+      {
+        "offset": ["170", "70"],
+        "type": "s32",
+        "name": "tooth[1].hp",
+        "notes": ""
+      },
+      {
+        "offset": ["174", "70"],
+        "type": "s32",
+        "name": "tooth[2].hp",
+        "notes": ""
+      },
+      {
+        "offset": ["178", "70"],
+        "type": "s32",
+        "name": "tooth[3].hp",
+        "notes": ""
+      },
+      {
+        "offset": ["17c", "70"],
+        "type": "s32",
+        "name": "tooth[4].hp",
+        "notes": ""
+      },
+      {
+        "offset": ["180", "70"],
+        "type": "s32",
+        "name": "tooth[5].hp",
+        "notes": ""
+      },
+      {
+        "offset": ["184", "70"],
+        "type": "s32",
+        "name": "tooth[6].hp",
+        "notes": ""
+      },
+      {
+        "offset": ["188", "70"],
+        "type": "s32",
+        "name": "tooth[7].hp",
+        "notes": ""
+      },
+      {
+        "offset": "1fc",
+        "type": "u8",
+        "name": "Water hit tooth flag",
+        "notes": ""
+      },
+      {
+        "offset": "1fd",
+        "type": "u8",
+        "name": "Molar washed flag",
+        "notes": ""
+      }
+    ]
+  }
+}

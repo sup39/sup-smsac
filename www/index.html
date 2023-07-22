@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SMS Web Object Viewer (v0.1.0-beta.1)</title>
+  <link rel="stylesheet" type="text/css" href="index.css">
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
+  <script src="api.js"></script>
+  <script src="index.js"></script>
+</head>
+<body>
+  <h1>SMS Web Object Viewer</h1>
+  <header>
+    <div id="msg"></div>
+    <details>
+      <summary>LICENSE</summary>
+      <p>Repository: <a href="https://github.com/sup39/sup-smsac" target="_blank" rel="noopener noreferrer">https://github.com/sup39/sup-smsac</a></p>
+      <p>Author: <a href="https://misskey.sup39.dev/@sms" target="_blank" rel="noopener noreferrer">sup39</a></p>
+      <p>License: MIT OR Apache-2.0</p>
+      <p><a href="/LICENSE.html" target="_blank" rel="noopener noreferrer">Full license text:</a></p>
+      <iframe id="license" src="/LICENSE.html" title="license"></iframe>
+    </details>
+  </header>
+  <section>
+    <button id="btn-reload" class="hidden">Reload Object Parameters</button>
+  </section>
+  <section class="flex-wrapper">
+    <div class="flex">
+      <table id="managers" class="list"></table>
+      <table id="fields-viewer" class="list"></table>
+    </div>
+  </section>
+</body>
