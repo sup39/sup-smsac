@@ -1,0 +1,19 @@
+{
+  "MActorAnmBck": {
+    "size": 60,
+    "offsets": [
+      {
+        "offset": "0",
+        "type": "s32",
+        "name": "id",
+        "notes": ""
+      },
+      {
+        "offset": "4",
+        "type": "J3DFrameCtrl",
+        "name": "Frame *",
+        "notes": ""
+      }
+    ]
+  }
+}

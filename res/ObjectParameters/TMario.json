@@ -1,0 +1,131 @@
+{
+  "TMario": {
+    "size": 17040,
+    "offsets": [
+      {
+        "offset": "0",
+        "type": "TTakeActor",
+        "name": "Inherited fields",
+        "notes": ""
+      },
+      {
+        "offset": "7c",
+        "type": "u32",
+        "format": "hex",
+        "name": "Current state",
+        "notes": ""
+      },
+      {
+        "offset": "80",
+        "type": "u32",
+        "format": "hex",
+        "name": "Previous state",
+        "notes": ""
+      },
+      {
+        "offset": "84",
+        "type": "u16",
+        "name": "Substate",
+        "notes": ""
+      },
+      {
+        "offset": "86",
+        "type": "u16",
+        "name": "Substate timer",
+        "notes": ""
+      },
+      {
+        "offset": "8c",
+        "type": "float",
+        "name": "Base acceleration (0-32)",
+        "notes": ""
+      },
+      {
+        "offset": "90",
+        "type": "s16",
+        "name": "Acceleration direction",
+        "notes": ""
+      },
+      {
+        "offset": "94",
+        "type": "s16",
+        "name": "X angle",
+        "notes": ""
+      },
+      {
+        "offset": "96",
+        "type": "s16",
+        "name": "Y angle (yaw)",
+        "notes": ""
+      },
+      {
+        "offset": "98",
+        "type": "s16",
+        "name": "Z angle",
+        "notes": ""
+      },
+      {
+        "offset": "a4",
+        "type": "JGeometry::TVec3<float>",
+        "name": "* Speed",
+        "notes": ""
+      },
+      {
+        "offset": "b0",
+        "type": "float",
+        "name": "Forward speed",
+        "notes": ""
+      },
+      {
+        "offset": "e0",
+        "type": "TBGCheckData*",
+        "name": "Floor triangle under Mario",
+        "notes": ""
+      },
+      {
+        "offset": "e8",
+        "type": "float",
+        "name": "Height of the ceiling above Mario",
+        "notes": "9,999,999 if none"
+      },
+      {
+        "offset": "ec",
+        "type": "float",
+        "name": "Height of the floor below Mario",
+        "notes": "-32,767 if none"
+      },
+      {
+        "offset": "f0",
+        "type": "float",
+        "name": "Height of the water surface at Mario’s position",
+        "notes": "Y position if none"
+      },
+      {
+        "offset": "118",
+        "type": "u32",
+        "name": "Mario flags",
+        "format": "hex",
+        "notes": "& 0x00000001: \n& 0x00000002: Above a sewer floor?\n& 0x00000004: Is visible?\n& 0x00000008: Talking to NPC?\n& 0x00000010: Left water recently?\n& 0x00000020: Is in shadow\n& 0x00000040: Is in goop\n& 0x00000080: Filling FLUDD\n& 0x00000100: Is NOT on wire (starts off?)\n& 0x00000200: \n& 0x00000400: Is \"TOO BAD!\"?\n& 0x00000800: Is Ground Pound sit up?\n& 0x00001000: Has helmet?\n& 0x00002000: \n& 0x00004000: Is turbo boosting\n& 0x00008000: Has FLUDD?\n& 0x00010000: Is standing in water?\n& 0x00020000: Is in water?\n& 0x00040000: Is above sand?\n& 0x00080000: \n& 0x00100000: \n& 0x00200000: \n& 0x00400000: \n& 0x00800000: \n& 0x01000000: \n& 0x02000000: \n& 0x04000000: \n& 0x08000000: \n& 0x10000000: \n& 0x20000000: \n& 0x40000000: \n& 0x80000000: \n"
+      },
+      {
+        "offset": "11C",
+        "type": "u32",
+        "format": "hex",
+        "name": "Previous Mario flags",
+        "notes": ""
+      },
+      {
+        "offset": "120",
+        "type": "s16",
+        "name": "HP",
+        "notes": ""
+      },
+      {
+        "offset": "12c",
+        "type": "float",
+        "name": "Underwater HP",
+        "notes": ""
+      }
+    ]
+  }
+}

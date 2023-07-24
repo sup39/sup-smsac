@@ -5,7 +5,11 @@
 pub enum SMSVersion {
   GMSJ01, GMSE01, GMSP01, GMSJ0A,
 }
-pub mod vt;
+impl std::fmt::Display for SMSVersion {
+  fn fmt(&self, fmt: &mut std::fmt::Formatter<'_>) -> Result<(), std::fmt::Error> {
+    std::fmt::Debug::fmt(self, fmt)
+  }
+}
 
 use crate::addr::Addr;
 use crate::dolphin::{DolphinMemory, Dolphin};
@@ -20,6 +24,7 @@ impl Dolphin for SMSDolphin {
   }
 }
 
+pub mod vt;
 impl SMSDolphin {
   #[inline]
   pub fn pid(&self) -> usize {

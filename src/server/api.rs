@@ -263,6 +263,11 @@ pub async fn handle_command(
       })
     },
 
+    "getVersion" => {
+      let_dolphin!(d);
+      Ok(json!(d.ver().to_string()))
+    },
+
     "reload" => {
       let mut lock_obj_params = env.obj_params_result.lock().await;
       load_obj_params(&env.obj_params_dir)

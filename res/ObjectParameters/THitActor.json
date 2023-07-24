@@ -61,14 +61,15 @@
         "offset": "60",
         "type": "float",
         "name": "Entry radius",
-        "notes": ""
+        "notes": "",
+        "hidden": true
       },
       {
         "offset": "64",
         "type": "u32",
         "format": "hex",
-        "name": "Collision flag\n  (0) active / (1) no collision",
-        "notes": ""
+        "name": "Collision flag",
+        "notes": "(0) active / (1) no collision"
       }
     ]
   }

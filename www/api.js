@@ -4,6 +4,7 @@
 // @ts-check
 /**
  * @typedef {number|number[]} ReqAddr
+ * @typedef {'GMSJ01'|'GMSE01'|'GMSP01'|'GMSJ0A'} SMSVersion
  */
 
 /** @param {string} s */
@@ -27,10 +28,10 @@ function Client({onClose = null}={}) {
   /**
    * @template T
    * @param {string} action
-   * @param {any} payload
+   * @param {any} [payload]
    * @returns {Promise<T>}
    */
-  const request = (action, payload) => new Promise((rsv, rjt) => {
+  const request = (action, payload=null) => new Promise((rsv, rjt) => {
     if (ws == null) throw Error('Client is not connected to server. Use `client.connect()` first.');
     const id = nextId++;
     reqs.set(id, {rsv, rjt});
@@ -62,7 +63,7 @@ function Client({onClose = null}={}) {
       /**
        * @returns {Promise<number|null>}
        */
-      init: () => request('init', null),
+      init: () => request('init'),
 
       /**
        * @param {ReqAddr} addr
@@ -123,16 +124,19 @@ function Client({onClose = null}={}) {
        */
       getFields: type => request('getFields', type),
 
-      getManagers: () => request('getManagers', 0)
-        .then((/**@type{[addr: number, cls: string, name: string, count: number][]}*/rows) =>
-          rows.map(row => ({addr: row[0], cls: row[1], name: row[2], count: row[3]}))),
+      getManagers: () => request('getManagers')
+        .then((/**@type{[addr: number, type: string, name: string, count: number][]|null}*/rows) =>
+          rows?.map(row => ({addr: row[0], type: row[1], name: row[2], count: row[3]})) ?? []),
 
       /**
        * @param {ReqAddr} addr
        */
       getManagees: addr => request('getManagees', addr)
-        .then((/**@type{[addr: number, cls: string, name: string][]}*/rows) =>
-          rows.map(row => ({addr: row[0], cls: row[1], name: row[2]}))),
+        .then((/**@type{[addr: number, type: string, name: string][]|null}*/rows) =>
+          rows?.map(row => ({addr: row[0], type: row[1], name: row[2]})) ?? []),
+
+      /** @returns {Promise<SMSVersion>} */
+      getVersion: ()  => request('getVersion'),
 
       reload: () => request('reload', null),
     },

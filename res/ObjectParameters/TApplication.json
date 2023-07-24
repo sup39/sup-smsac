@@ -1,0 +1,59 @@
+{
+  "TApplication": {
+    "size": 80,
+    "offsets": [
+      {
+        "offset": "0",
+        "type": "TApplication*",
+        "name": "Pointer to itself",
+        "notes": "",
+        "hidden": true
+      },
+      {
+        "offset": "4",
+        "type": "TDirector*",
+        "name": "Current director",
+        "notes": ""
+      },
+      {
+        "offset": "8",
+        "type": "u8",
+        "name": "Director type",
+        "notes": "Director type\n2: [null] setup for 3? (after boot)\n3: [TGCLogoDir] Show Nintendo logo\n4: [TMovieDirector] Title screen FMV\n5: [TMarDirector/TMovieDirector] Regular game play (including most FMV)\n6: [TMovieDirector] other independent FMV (e.g. FLUDD tutorial, BH2 warp zone)\n7: Error? \n8: [TSelectDir] shine select\n9: [TMenuDirector] level select (for debug purpose?)"
+      },
+      {
+        "offset": "a",
+        "type": "u16",
+        "format": "hex",
+        "name": "Previous area",
+        "notes": ""
+      },
+      {
+        "offset": "e",
+        "type": "u16",
+        "format": "hex",
+        "name": "Current area",
+        "notes": ""
+      },
+      {
+        "offset": "12",
+        "type": "u16",
+        "format": "hex",
+        "name": "Next area",
+        "notes": ""
+      },
+      {
+        "offset": "18",
+        "type": "u16",
+        "name": "Current FMV",
+        "notes": ""
+      },
+      {
+        "offset": "38",
+        "type": "s32",
+        "name": "Current save file",
+        "notes": ""
+      }
+    ]
+  }
+}

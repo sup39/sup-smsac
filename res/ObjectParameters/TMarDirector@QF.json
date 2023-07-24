@@ -1,0 +1,19 @@
+{
+  "TMarDirector@QF": {
+    "size": 616,
+    "offsets": [
+      {
+        "offset": "58",
+        "type": "u32",
+        "name": "Game QF",
+        "notes": ""
+      },
+      {
+        "offset": "5c",
+        "type": "u32",
+        "name": "Global QF",
+        "notes": ""
+      }
+    ]
+  }
+}

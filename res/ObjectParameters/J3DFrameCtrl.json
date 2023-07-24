@@ -1,0 +1,47 @@
+{
+  "J3DFrameCtrl": {
+    "size": 20,
+    "offsets": [
+      {
+        "offset": "0",
+        "type": "void*",
+        "name": "vtable",
+        "notes": "",
+        "hidden": true
+      },
+      {
+        "offset": "4",
+        "type": "u8",
+        "name": "field_0x4",
+        "notes": "",
+        "hidden": true
+      },
+      {
+        "offset": "5",
+        "type": "u8",
+        "format": "hex",
+        "name": "Flag",
+        "notes": "",
+        "hidden": false
+      },
+      {
+        "offset": "8",
+        "type": "s16",
+        "name": "Length",
+        "notes": ""
+      },
+      {
+        "offset": "c",
+        "type": "float",
+        "name": "Step",
+        "notes": ""
+      },
+      {
+        "offset": "10",
+        "type": "float",
+        "name": "Counter",
+        "notes": ""
+      }
+    ]
+  }
+}

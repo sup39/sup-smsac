@@ -18,32 +18,22 @@
       {
         "offset": "74",
         "type": "MActor*",
-        "name": "",
-        "notes": ""
+        "name": "MActor",
+        "notes": "",
+        "hidden": true
       },
       {
         "offset": ["74", "c", "0"],
-        "type": "s32",
-        "name": "Animation id",
+        "type": "MActorAnmBck",
+        "name": "Current Animation *",
         "notes": ""
       },
       {
-        "offset": ["74", "28", "0", "14"],
-        "type": "float",
-        "name": "Animation frame counter",
-        "notes": ""
-      },
-      {
-        "offset": ["74", "28", "0", "c"],
-        "type": "s16",
-        "name": "Animation frame length",
-        "notes": ""
-      },
-      {
-        "offset": ["74", "28", "0", "10"],
-        "type": "float",
-        "name": "Animation frame rate",
-        "notes": ""
+        "offset": ["74", "28", "0", "0"],
+        "type": "MActorAnmBck",
+        "name": "Animations[0] *",
+        "notes": "",
+        "hidden": true
       },
       {
         "offset": "7c",
@@ -70,7 +60,8 @@
         "offset": "8c",
         "type": "TSpineBase<TLiveActor>*",
         "name": "AI",
-        "notes": ""
+        "notes": "",
+        "hidden": true
       },
       {
         "offset": ["8c", "1c", "0"],
@@ -94,37 +85,43 @@
         "offset": "94",
         "type": "JGeometry::TVec3<float>",
         "name": "* Movement (unit/step)",
-        "notes": ""
+        "notes": "",
+        "hidden": true
       },
       {
         "offset": "ac",
         "type": "JGeometry::TVec3<float>",
         "name": "* Speed (unit/step)",
-        "notes": ""
+        "notes": "",
+        "hidden": true
       },
       {
         "offset": "bc",
         "type": "float",
         "name": "Wall hitbox width",
-        "notes": ""
+        "notes": "",
+        "hidden": true
       },
       {
         "offset": "c4",
         "type": "TBGCheckData*",
-        "name": "",
-        "notes": ""
+        "name": "Ground",
+        "notes": "",
+        "hidden": true
       },
       {
         "offset": "c8",
         "type": "float",
         "name": "Ground Height",
-        "notes": ""
+        "notes": "",
+        "hidden": true
       },
       {
         "offset": "cc",
         "type": "float",
         "name": "Gravity (unit/step²)",
-        "notes": ""
+        "notes": "",
+        "hidden": true
       },
       {
         "offset": "f0",

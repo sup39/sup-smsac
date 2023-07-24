@@ -12,7 +12,8 @@
         "offset": "20",
         "type": "JStage::TActor",
         "name": "Inherited fields",
-        "notes": ""
+        "notes": "",
+        "hidden": true
       },
       {
         "offset": "24",

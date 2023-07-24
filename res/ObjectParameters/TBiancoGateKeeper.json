@@ -1,0 +1,55 @@
+{
+  "TBiancoGateKeeper": {
+    "size": 672,
+    "offsets": [
+      {
+        "offset": "0",
+        "type": "TSpineEnemy",
+        "name": "Inherited fields",
+        "notes": ""
+      },
+      {
+        "offset": "13c",
+        "type": "u8",
+        "name": "HP",
+        "notes": ""
+      },
+      {
+        "offset": "154",
+        "type": "u32",
+        "name": "Received water count",
+        "notes": "Increased in TGateKeeperBase::receiveMessage()\nReset in TGateKeeperBase::perform() every frame"
+      },
+      {
+        "offset": "17c",
+        "type": "s16",
+        "name": "Total water damage (~255)",
+        "notes": ""
+      },
+      {
+        "offset": "17e",
+        "type": "s16",
+        "name": "Water damage timer (QF)",
+        "notes": ""
+      },
+      {
+        "offset": "292",
+        "type": "u8",
+        "name": "GateKeeper type",
+        "notes": "[0] in AP\n[1] in BH [2] BH unlock\n[3] RH unlock\n[4] GB unlock"
+      },
+      {
+        "offset": "296",
+        "type": "s16",
+        "name": "Death count",
+        "notes": ""
+      },
+      {
+        "offset": "298",
+        "type": "s16",
+        "name": "Timer to launch Goro (BH only)",
+        "notes": ""
+      }
+    ]
+  }
+}

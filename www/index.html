@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>SMS Web Object Viewer (v0.1.0-beta.1)</title>
+  <title>SMS Web Object Viewer (v0.1.0-beta.2)</title>
   <link rel="stylesheet" type="text/css" href="index.css">
   <link rel="icon" type="image/svg+xml" href="icon.svg">
   <script src="api.js"></script>
   <script src="index.js"></script>
 </head>
 <body>
-  <h1>SMS Web Object Viewer</h1>
+  <h1>SMS Web Object Viewer (v0.1.0-beta.2)</h1>
   <header>
     <div id="msg"></div>
     <details>
@@ -20,13 +20,27 @@
       <iframe id="license" src="/LICENSE.html" title="license"></iframe>
     </details>
   </header>
-  <section>
-    <button id="btn-reload" class="hidden">Reload Object Parameters</button>
-  </section>
-  <section class="flex-wrapper">
-    <div class="flex">
-      <table id="managers" class="list"></table>
-      <table id="fields-viewer" class="list"></table>
-    </div>
-  </section>
+  <main>
+    <section>
+      <button id="btnReloadManagers">Reload Managers</button>
+      <input type="checkbox" id="cbShowManagers" checked>
+        <label for="cbShowManagers">Show Manager List</label>
+      <input type="checkbox" id="cbShowObjParamsNotes">
+        <label for="cbShowObjParamsNotes">Show Notes of Object Parameters</label>
+      <input type="checkbox" id="cbWrapFlex">
+        <label for="cbWrapFlex">Wrap UI</label>
+      <button id="btnReloadObjParams">Reload ObjectParameters</button>
+    </section>
+    <section class="flex-wrapper">
+      <div class="flex">
+        <div id="managerList">
+          <table class="list"></table>
+        </div>
+        <div id="fieldsViewer" class="hidden">
+          <h3></h3>
+          <table class="list"></table>
+        </div>
+      </div>
+    </section>
+  </main>
 </body>
