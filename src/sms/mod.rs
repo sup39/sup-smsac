@@ -20,10 +20,13 @@ pub struct SMSDolphin {
   ver: SMSVersion,
 }
 impl Dolphin for SMSDolphin {
-  unsafe fn operate_memory_unchecked<T, F>(&self, maddr: DolphinMemAddr, size: usize, operator: F) -> Option<T>
-    where F: FnOnce(*mut u8) -> T
+  unsafe fn read_memory_unchecked<T, F>(&self, maddr: DolphinMemAddr, size: usize, operator: F) -> Option<T>
+    where F: FnOnce(*const u8) -> T
   {
-    self.d.operate_memory_unchecked(maddr, size, operator)
+    self.d.read_memory_unchecked(maddr, size, operator)
+  }
+  unsafe fn write_memory_unchecked(&self, maddr: DolphinMemAddr, payload: &[u8]) -> Option<()> {
+    self.d.write_memory_unchecked(maddr, payload)
   }
 }
 
@@ -81,10 +84,17 @@ impl SMSDolphin {
     for (pid, d) in DolphinMemory::list() {
       match d {
         Some(d) => {
-          if let Ok(o) = SMSDolphin::from_dolphin_memory(d, pid) {
-            return Ok(o)
+          match SMSDolphin::from_dolphin_memory(d, pid) {
+            Ok(o) => return Ok(o),
+            Err(e) => {
+              game_running = true;
+              match e {
+                Some(e) => eprintln!("Unknown game (pid: {pid}): {}",
+                  e.map(|c| format!("{c:02X}")).join("")),
+                None => eprintln!("Unknown game (pid: {pid}): fail to get version"),
+              }
+            }
           }
-          game_running = true;
         },
         None => dolphin_running = true,
       }

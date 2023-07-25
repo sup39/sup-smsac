@@ -1,4 +1,8 @@
 # Changelog
+## v0.1.0-beta.4 (2023/07/26)
+- Added validity check on MEM1 of DolphinProcessMemory
+- Fixed write memory API
+
 ## v0.1.0-beta.3 (2023/07/25)
 - Added support for older Dolphin (e.g. Dolphin 5.0-114)
 - Added support for MEM2

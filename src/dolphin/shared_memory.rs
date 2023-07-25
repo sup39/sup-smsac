@@ -12,10 +12,8 @@ pub struct DolphinSharedMemory {
 
 pub const MEM2_OFFSET: u32 = 0x4040000;
 impl Dolphin for DolphinSharedMemory {
-  /// # Safety
-  /// `maddr + size` must be in bound
-  unsafe fn operate_memory_unchecked<T, F>(&self, maddr: DolphinMemAddr, _size: usize, operator: F) -> Option<T>
-    where F: FnOnce(*mut u8) -> T
+  unsafe fn read_memory_unchecked<T, F>(&self, maddr: DolphinMemAddr, _size: usize, operator: F) -> Option<T>
+    where F: FnOnce(*const u8) -> T
   {
     match maddr {
       DolphinMemAddr::MEM1(offset) => Some(offset),
@@ -25,6 +23,22 @@ impl Dolphin for DolphinSharedMemory {
       },
     }.map(|offset| {
       operator(self.shared_memory.get_ptr().add(offset as usize))
+    })
+  }
+
+  unsafe fn write_memory_unchecked(&self, maddr: DolphinMemAddr, payload: &[u8]) -> Option<()> {
+    match maddr {
+      DolphinMemAddr::MEM1(offset) => Some(offset),
+      DolphinMemAddr::MEM2(offset) => match self.has_mem2 {
+        true => Some(MEM2_OFFSET + offset),
+        false => None,
+      },
+    }.map(|offset| {
+      std::ptr::copy(
+        payload.as_ptr(),
+        self.shared_memory.get_ptr().add(offset as usize),
+        payload.len(),
+      );
     })
   }
 }

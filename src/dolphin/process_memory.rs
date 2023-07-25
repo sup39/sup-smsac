@@ -14,9 +14,10 @@ use crate::sys::process_memory::ProcessMemoryIterator;
 use core::ffi::c_void;
 use windows::Win32::Foundation::{HANDLE, CloseHandle};
 use windows::Win32::System::{
-  Threading::{PROCESS_QUERY_INFORMATION, PROCESS_VM_READ, PROCESS_VM_WRITE, OpenProcess},
+  Threading::{PROCESS_QUERY_INFORMATION, PROCESS_VM_OPERATION, PROCESS_VM_READ, PROCESS_VM_WRITE, OpenProcess},
   Memory::MEM_MAPPED,
-  Diagnostics::Debug::ReadProcessMemory,
+  Diagnostics::Debug::{ReadProcessMemory, WriteProcessMemory},
+  ProcessStatus::{PSAPI_WORKING_SET_EX_INFORMATION, QueryWorkingSetEx},
 };
 
 pub struct DolphinProcessMemory {
@@ -32,8 +33,8 @@ impl Drop for DolphinProcessMemory {
   }
 }
 impl Dolphin for DolphinProcessMemory {
-  unsafe fn operate_memory_unchecked<T, F>(&self, maddr: DolphinMemAddr, size: usize, operator: F) -> Option<T>
-    where F: FnOnce(*mut u8) -> T
+  unsafe fn read_memory_unchecked<T, F>(&self, maddr: DolphinMemAddr, size: usize, operator: F) -> Option<T>
+    where F: FnOnce(*const u8) -> T
   {
     match maddr {
       DolphinMemAddr::MEM1(offset) => Some(self.base_addr_mem1 + (offset as usize)),
@@ -46,6 +47,23 @@ impl Dolphin for DolphinProcessMemory {
         ptr as *mut c_void, size, None,
       ).as_bool()} {
         true => Some(operator(ptr)),
+        false => None,
+      }
+    })
+  }
+
+  unsafe fn write_memory_unchecked(&self, maddr: DolphinMemAddr, payload: &[u8]) -> Option<()> {
+    match maddr {
+      DolphinMemAddr::MEM1(offset) => Some(self.base_addr_mem1 + (offset as usize)),
+      DolphinMemAddr::MEM2(offset) => self.base_addr_mem2.map(|base_addr| base_addr + (offset as usize)),
+    }.and_then(|base_addr| {
+      let size = payload.len();
+      let ptr = payload.as_ptr();
+      match unsafe {WriteProcessMemory(
+        self.h_proc, base_addr as *const c_void,
+        ptr as *mut c_void, size, None,
+      ).as_bool()} {
+        true => Some(()),
         false => None,
       }
     })
@@ -64,13 +82,26 @@ impl From<windows::core::Error> for DolphinProcessMemoryFindError {
 impl DolphinProcessMemory {
   pub fn open_pid(pid: PidType) -> Result<DolphinProcessMemory, DolphinProcessMemoryFindError> {
     unsafe {
-      let h_proc = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ | PROCESS_VM_WRITE, false, pid)?;
+      let h_proc = OpenProcess(
+        PROCESS_QUERY_INFORMATION | PROCESS_VM_OPERATION | PROCESS_VM_READ | PROCESS_VM_WRITE,
+        false, pid,
+      )?;
       let mut itr = ProcessMemoryIterator::with_handle(h_proc);
 
       // find MEM1
       let Some(base_addr_mem1) =
-        itr.find(|meminfo| meminfo.RegionSize == 0x2000000 && meminfo.Type == MEM_MAPPED)
-          .map(|meminfo| meminfo.BaseAddress)
+        itr.find(|meminfo| meminfo.RegionSize == 0x2000000 && meminfo.Type == MEM_MAPPED && {
+          let mut wsinfo = PSAPI_WORKING_SET_EX_INFORMATION {
+            VirtualAddress: meminfo.BaseAddress,
+            ..PSAPI_WORKING_SET_EX_INFORMATION::default()
+          };
+          QueryWorkingSetEx(
+            h_proc,
+            &mut wsinfo as *mut PSAPI_WORKING_SET_EX_INFORMATION as *mut c_void,
+            std::mem::size_of::<PSAPI_WORKING_SET_EX_INFORMATION>() as u32
+          ).as_bool()
+            && wsinfo.VirtualAttributes.Flags & 1 != 0
+        }).map(|meminfo| meminfo.BaseAddress)
       else {
         CloseHandle(h_proc);
         return Err(DolphinProcessMemoryFindError::MemoryNotFound);
@@ -83,6 +114,7 @@ impl DolphinProcessMemory {
           meminfo.BaseAddress == base_addr_mem2_check
             && meminfo.RegionSize == 0x4000000
             && meminfo.Type == MEM_MAPPED
+          // TODO check valid
         }).map(|_| base_addr_mem2_check as usize);
 
       Ok(DolphinProcessMemory {
