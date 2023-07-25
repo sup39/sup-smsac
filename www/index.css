@@ -52,6 +52,9 @@ table.list td {
 #fieldsViewer td:nth-child(3) {
   text-align: right;
 }
+#fieldsViewer td:nth-child(3) {
+  min-width: 8em;
+}
 #fieldsViewer td:nth-child(4) {
   display: none;
 }

@@ -6,5 +6,6 @@ outDir=out/sup-smsac-$version
 mkdir -p "$outDir"
 
 cargo build --release
+cargo-about generate about.hbs -o www/LICENSE.html
 cp ./target/release/sup-smsac.exe "$outDir/"
 cp -r www res README.md LICENSE.txt CHANGELOG.md "$outDir/"

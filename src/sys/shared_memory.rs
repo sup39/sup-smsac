@@ -1,6 +1,7 @@
 /// SPDX-FileCopyrightText: 2023 sup39 <sms@sup39.dev>
 /// SPDX-License-Identifier: MIT OR Apache-2.0
 
+use core::ffi::c_void;
 use windows::core::PCSTR;
 use windows::Win32::Foundation::{HANDLE, CloseHandle};
 use windows::Win32::System::Memory::{
@@ -9,6 +10,8 @@ use windows::Win32::System::Memory::{
   MapViewOfFile,
   UnmapViewOfFile,
   MEMORYMAPPEDVIEW_HANDLE,
+  MEMORY_BASIC_INFORMATION,
+  VirtualQuery,
 };
 
 #[derive(Debug)]
@@ -21,11 +24,16 @@ pub enum SharedMemoryOpenError {
 pub struct SharedMemory {
   h_file_mapping: HANDLE,
   h_map_view: MEMORYMAPPEDVIEW_HANDLE,
+  size: u32,
 }
 impl SharedMemory {
   #[inline]
   pub fn get_ptr(&self) -> *mut u8 {
     self.h_map_view.0 as *mut u8
+  }
+  #[inline]
+  pub fn size(&self) -> u32 {
+    self.size
   }
 }
 
@@ -51,8 +59,14 @@ impl SharedMemory {
       return Err(SharedMemoryOpenError::MemoryUninitialized);
     }
 
+    let mut meminfo = MEMORY_BASIC_INFORMATION::default();
+    unsafe {VirtualQuery(
+      Some(h_map_view.0 as *mut c_void), &mut meminfo, std::mem::size_of::<MEMORY_BASIC_INFORMATION>(),
+    )};
+    let size = meminfo.RegionSize as u32;
+
     // create SharedMemory successfully
-    Ok(Self {h_file_mapping, h_map_view})
+    Ok(Self {h_file_mapping, h_map_view, size})
   }
 }
 

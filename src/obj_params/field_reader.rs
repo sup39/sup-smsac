@@ -70,7 +70,6 @@ impl FieldReader<SMSDolphin, String> for ClassNameReader {
 pub struct HexFieldReader(pub usize);
 impl<D: Dolphin> FieldReader<D, String> for HexFieldReader {
   fn read(&self, d: &D, addr: Addr) -> Option<String> {
-    d.read_bytes(addr, self.0)
-      .map(|bytes| bytes.iter().map(|x| format!("{x:02X}")).collect())
+    d.dump_hex(addr, self.0)
   }
 }

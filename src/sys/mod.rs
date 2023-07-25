@@ -3,3 +3,4 @@
 
 pub mod process;
 pub mod shared_memory;
+pub mod process_memory;

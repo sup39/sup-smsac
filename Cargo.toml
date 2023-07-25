@@ -1,6 +1,6 @@
 [package]
 name = "sup-smsac"
-version = "0.1.0-beta.2"
+version = "0.1.0-beta.3"
 edition = "2021"
 license = "MIT OR Apache-2.0"
 authors = ["sup39 <sms@sup39.dev>"]
@@ -13,7 +13,9 @@ encoding_rs = "0.8.32"
 windows = {version = "0.48.0", features = [
   "Win32_Foundation",
   "Win32_System_Diagnostics_ToolHelp",
+  "Win32_System_Diagnostics_Debug",
   "Win32_System_Memory",
+  "Win32_System_Threading",
 ]}
 futures-util = "0.3.28"
 hyper = { version = "0.14.27", features = ["full"] }

@@ -3,7 +3,7 @@
 
 use std::ffi::OsString;
 use std::os::windows::ffi::OsStringExt;
-use windows::Win32::Foundation::{HANDLE, BOOL};
+use windows::Win32::Foundation::{HANDLE, BOOL, CloseHandle};
 use windows::Win32::System::Diagnostics::ToolHelp::{
   CreateToolhelp32Snapshot,
   TH32CS_SNAPPROCESS,
@@ -17,7 +17,6 @@ pub struct Process32Iterator {
   fn_next: unsafe fn(HANDLE, *mut PROCESSENTRY32W) -> BOOL,
 }
 
-// https://learn.microsoft.com/en-us/windows/win32/api/tlhelp32/nf-tlhelp32-createtoolhelp32snapshot
 impl Process32Iterator {
   pub fn new() -> Self {
     Process32Iterator {
@@ -29,6 +28,13 @@ impl Process32Iterator {
 impl Default for Process32Iterator {
   fn default() -> Self {
     Self::new()
+  }
+}
+impl Drop for Process32Iterator {
+  fn drop(&mut self) {
+    unsafe {
+      CloseHandle(self.hsnapshot);
+    }
   }
 }
 
@@ -49,7 +55,7 @@ impl Iterator for Process32Iterator {
   }
 }
 
-pub type PidType = usize;
+pub type PidType = u32;
 pub trait ProcessInfo {
   fn pid(&self) -> PidType;
   fn get_name(&self) -> OsString;

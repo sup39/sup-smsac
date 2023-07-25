@@ -1,4 +1,10 @@
 # SPDX-FileCopyrightText: 2023 sup39 <sms@sup39.dev>
 # SPDX-License-Identifier: MIT OR Apache-2.0
 
+Some of the code regarding finding dolphin is based on
+  aldelaro5's Dolphin memory engine
+  (https://github.com/aldelaro5/Dolphin-memory-engine)
+# SPDX-FileCopyrightText: 2017 aldelaro5
+# SPDX-License-Identifier: MIT
+
 See "www/LICENSE.html" for the full license text.

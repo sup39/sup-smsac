@@ -13,6 +13,10 @@ Download the binary from the [releases page](https://github.com/sup39/sup-smsac/
 Requirements:
 - [cargo](https://www.rust-lang.org/tools/install)
 - [Git Bash](https://git-scm.com/download/win)
+- [cargo-about](https://github.com/EmbarkStudios/cargo-about)
+    ```
+    cargo install --locked cargo-about
+    ```
 
 ```sh
 # Clone the repository

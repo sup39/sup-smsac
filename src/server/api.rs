@@ -63,7 +63,6 @@ impl<T: Dolphin> DolphinMemoryJsExt for T {
   }
 }
 
-
 pub async fn handle_command(
   env: &HttpEnv,
   dolphin: &mut Option<SMSDolphin>,
@@ -181,8 +180,8 @@ pub async fn handle_command(
           let Some(size) = size.as_u64().map(|x| x as usize) else {
             return_err!("\"size\" must be a positive integer");
           };
-          d.read_bytes(addr, size)
-            .map(|bytes| json!(bytes.iter().map(|x| format!("{:02X}", x)).collect::<String>()))
+          d.dump_hex(addr, size)
+            .map(|s| json!(s))
             .unwrap_or_else(|| json!(null))
         },
         None => {

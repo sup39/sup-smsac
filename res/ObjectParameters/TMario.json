@@ -80,24 +80,32 @@
         "offset": "e0",
         "type": "TBGCheckData*",
         "name": "Floor triangle under Mario",
+        "hidden": true,
+        "notes": ""
+      },
+      {
+        "offset": ["e0", "0"],
+        "type": "TBGCheckData",
+        "name": "Ground *",
+        "hidden": false,
         "notes": ""
       },
       {
         "offset": "e8",
         "type": "float",
-        "name": "Height of the ceiling above Mario",
+        "name": "Ceiling height",
         "notes": "9,999,999 if none"
       },
       {
         "offset": "ec",
         "type": "float",
-        "name": "Height of the floor below Mario",
+        "name": "Ground height",
         "notes": "-32,767 if none"
       },
       {
         "offset": "f0",
         "type": "float",
-        "name": "Height of the water surface at Mario’s position",
+        "name": "Water surface height",
         "notes": "Y position if none"
       },
       {
