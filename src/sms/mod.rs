@@ -38,16 +38,18 @@ impl SMSDolphin {
   }
 
   pub fn from_dolphin_memory(d: DolphinMemory, pid: PidType) -> Result<SMSDolphin, Option<[u8; 8]>> {
-    match d.read::<&[u8; 8]>(Addr(0x80000000)) {
-      None => Err(None),
-      Some(rver) => match rver {
-        b"GMSJ01\x00\x00" => Ok(SMSVersion::GMSJ01),
-        b"GMSE01\x00\x30" => Ok(SMSVersion::GMSE01),
-        b"GMSP01\x00\x00" => Ok(SMSVersion::GMSP01),
-        b"GMSJ01\x00\x01" => Ok(SMSVersion::GMSJ0A),
-        _ => Err(Some(rver.to_owned())),
-      }.map(|ver| SMSDolphin {d, ver, pid}),
-    }
+    unsafe {
+      d.read_memory_unchecked(DolphinMemAddr::MEM1(0), 8, |ptr| {
+        match &*(ptr as *const [u8; 8]) {
+          b"GMSJ01\x00\x00" => Ok(SMSVersion::GMSJ01),
+          b"GMSE01\x00\x30" => Ok(SMSVersion::GMSE01),
+          b"GMSP01\x00\x00" => Ok(SMSVersion::GMSP01),
+          b"GMSJ01\x00\x01" => Ok(SMSVersion::GMSJ0A),
+          rver => Err(Some(rver.to_owned())),
+        }
+      })
+    } .unwrap_or(Err(None))
+      .map(|ver| SMSDolphin {d, ver, pid})
   }
   pub fn get_class(&self, addr: Addr) -> Option<&'static str> {
     vt::get_class(self.ver, addr)

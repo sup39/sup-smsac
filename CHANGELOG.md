@@ -1,4 +1,7 @@
 # Changelog
+## v0.1.0-beta.5 (2023/07/26)
+- Fixed get version function
+
 ## v0.1.0-beta.4 (2023/07/26)
 - Added validity check on MEM1 of DolphinProcessMemory
 - Fixed write memory API

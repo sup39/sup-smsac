@@ -45,9 +45,9 @@ impl_decode_be_for_int!(i128, 16);
 impl_decode_be_for_float!(f32, u32, 4);
 impl_decode_be_for_float!(f64, u64, 8);
 
-impl<const N: usize> DecodeBE for &[u8; N] {
+impl<const N: usize> DecodeBE for [u8; N] {
   const PACKED_SIZE: usize = N;
   unsafe fn decode_be(ptr: *const u8) -> Self {
-    &*(ptr as *const [u8; N])
+    *(ptr as *const [u8; N])
   }
 }
